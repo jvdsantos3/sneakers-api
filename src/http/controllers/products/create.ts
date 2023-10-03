@@ -18,19 +18,16 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
 
   const createProductUseCase = makeCreateProductUseCase()
 
-  try {
-    await createProductUseCase.execute({
-      image,
-      name,
-      size,
-      brand,
-      price,
-      amount,
-      userId: 'f145d469-d181-40f1-8bce-77ef7db2967b'
-    })
-  } catch(err) {
-    console.log(err)
-  }
+  await createProductUseCase.execute({
+    image,
+    name,
+    size,
+    brand,
+    price,
+    amount,
+    userId: 'f145d469-d181-40f1-8bce-77ef7db2967b'
+  })
+
 
   return reply.status(201).send()
 }
