@@ -13,8 +13,14 @@ export class PrismaProductsRepository implements ProductsRepository {
     return product
   }
 
-  async findMany(page: number) {
+  async findMany(page: number, query?: string) {
     const products = await prisma.product.findMany({
+      where: {
+        name: {
+          contains: query,
+          mode: 'insensitive',
+        },
+      },
       take: 20,
       skip: (page - 1) * 20,
       orderBy: [

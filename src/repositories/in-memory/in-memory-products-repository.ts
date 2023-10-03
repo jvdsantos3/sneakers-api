@@ -14,7 +14,13 @@ export class InMemoryProductsRepository implements ProductsRepository {
     return product
   }
 
-  async findMany(page: number) {
+  async findMany(page: number, query?:string) {
+    if (query) {
+      return this.items
+        .filter((item) => item.name.toLowerCase().includes(query.toLowerCase()))
+        .slice((page - 1) * 20, page * 20)
+    }
+
     return this.items.slice((page - 1) * 20, page * 20)
   }
 

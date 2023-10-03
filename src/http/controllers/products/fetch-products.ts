@@ -5,14 +5,16 @@ import { makeFetchProductsUseCase } from '../../../use-cases/factories/make-fetc
 export async function fetchProducts(request: FastifyRequest, reply: FastifyReply) {
   const fetchProductsQuerySchema = z.object({
     page: z.coerce.number().min(1).default(1),
+    query: z.string().optional(),
   })
 
-  const { page } = fetchProductsQuerySchema.parse(request.query)
+  const { page, query } = fetchProductsQuerySchema.parse(request.query)
 
   const fetchProductsUseCase = makeFetchProductsUseCase()
 
   const { products } = await fetchProductsUseCase.execute({
     page,
+    query: query,
   })
 
   return reply.status(200).send({

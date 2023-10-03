@@ -64,4 +64,60 @@ describe('Fetch Products Use Case', () => {
       expect.objectContaining({ name: 'Product 22' })
     ])
   })
+
+  it('should be able to fetch products with query', async () => {
+    await productsRepository.create({
+      image: 'img',
+      name: 'Nike',
+      size: 40,
+      brand: 'Nike',
+      price: 180000,
+      amount: 1,
+      userId: 'user-01'
+    })
+
+    await productsRepository.create({
+      image: 'img',
+      name: 'Adidas',
+      size: 40,
+      brand: 'Nike',
+      price: 200000,
+      amount: 1,
+      userId: 'user-01'
+    })
+
+    const { products } = await sut.execute({
+      page: 1,
+      query: 'Nike'
+    }) 
+
+    expect(products).toEqual([
+      expect.objectContaining({ name: 'Nike' })
+    ])
+  })
+
+  it('should be able to fetch paginated products with query', async () => {
+    for (let i = 1; i <= 22; i++) {
+      await productsRepository.create({
+        image: 'img',
+        name: `Nike ${i}`,
+        size: 40,
+        brand: 'Nike',
+        price: 200000,
+        amount: 1,
+        userId: 'user-01'
+      }) 
+    }
+
+    const { products } = await sut.execute({
+      page: 2,
+      query: 'Nike'
+    }) 
+
+    expect(products).toHaveLength(2)
+    expect(products).toEqual([
+      expect.objectContaining({ name: 'Nike 21' }),
+      expect.objectContaining({ name: 'Nike 22' })
+    ])
+  })
 })

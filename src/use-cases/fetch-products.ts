@@ -3,6 +3,7 @@ import { ProductsRepository } from './../repositories/product-repository'
 
 interface FetchProductUseCaseRequest {
   page: number
+  query?: string
 }
 
 interface FetchProductUseCaseResponse {
@@ -12,8 +13,8 @@ interface FetchProductUseCaseResponse {
 export class FetchProductsUseCase {
   constructor(private productsRepository:ProductsRepository) {}
 
-  async execute({ page }: FetchProductUseCaseRequest): Promise<FetchProductUseCaseResponse> {
-    const products = await this.productsRepository.findMany(page)
+  async execute({ page, query }: FetchProductUseCaseRequest): Promise<FetchProductUseCaseResponse> {
+    const products = await this.productsRepository.findMany(page, query)
 
     return {
       products,
