@@ -16,12 +16,18 @@ export class InMemoryProductsRepository implements ProductsRepository {
 
   async findMany(page: number, query?:string) {
     if (query) {
-      return this.items
-        .filter((item) => item.name.toLowerCase().includes(query.toLowerCase()))
-        .slice((page - 1) * 20, page * 20)
+      return {
+        products: this.items
+          .filter((item) => item.name.toLowerCase().includes(query.toLowerCase()))
+          .slice((page - 1) * 20, page * 20),
+        total: this.items.length
+      }
     }
 
-    return this.items.slice((page - 1) * 20, page * 20)
+    return {
+      products: this.items.slice((page - 1) * 20, page * 20),
+      total: this.items.length
+    }
   }
 
   async create(data: Prisma.ProductUncheckedCreateInput) {

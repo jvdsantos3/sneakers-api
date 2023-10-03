@@ -32,13 +32,14 @@ describe('Fetch Products Use Case', () => {
       userId: 'user-01'
     })
 
-    const { products } = await sut.execute({ page: 1 })
+    const { products, total } = await sut.execute({ page: 1 })
 
     expect(products).toHaveLength(2)
     expect(products).toEqual([
       expect.objectContaining({ name: 'Product 1' }),
       expect.objectContaining({ name: 'Product 2' })
     ])
+    expect(total).toEqual(2)
   })
 
   it('should be able to fetch paginated products', async () => {
@@ -54,10 +55,11 @@ describe('Fetch Products Use Case', () => {
       }) 
     }
 
-    const { products } = await sut.execute({
+    const { products, total } = await sut.execute({
       page: 2
     }) 
 
+    expect(total).toEqual(22)
     expect(products).toHaveLength(2)
     expect(products).toEqual([
       expect.objectContaining({ name: 'Product 21' }),
@@ -86,11 +88,12 @@ describe('Fetch Products Use Case', () => {
       userId: 'user-01'
     })
 
-    const { products } = await sut.execute({
+    const { products, total } = await sut.execute({
       page: 1,
       query: 'Nike'
     }) 
 
+    expect(total).toEqual(2)
     expect(products).toEqual([
       expect.objectContaining({ name: 'Nike' })
     ])
@@ -109,11 +112,12 @@ describe('Fetch Products Use Case', () => {
       }) 
     }
 
-    const { products } = await sut.execute({
+    const { products, total } = await sut.execute({
       page: 2,
       query: 'Nike'
     }) 
 
+    expect(total).toEqual(22)
     expect(products).toHaveLength(2)
     expect(products).toEqual([
       expect.objectContaining({ name: 'Nike 21' }),

@@ -12,12 +12,13 @@ export async function fetchProducts(request: FastifyRequest, reply: FastifyReply
 
   const fetchProductsUseCase = makeFetchProductsUseCase()
 
-  const { products } = await fetchProductsUseCase.execute({
+  const { products, total } = await fetchProductsUseCase.execute({
     page,
     query: query,
   })
 
   return reply.status(200).send({
     products,
+    total
   })
 }

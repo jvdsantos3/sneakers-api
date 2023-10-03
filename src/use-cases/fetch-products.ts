@@ -8,16 +8,18 @@ interface FetchProductUseCaseRequest {
 
 interface FetchProductUseCaseResponse {
   products: Product[]
+  total: number
 }
 
 export class FetchProductsUseCase {
   constructor(private productsRepository:ProductsRepository) {}
 
   async execute({ page, query }: FetchProductUseCaseRequest): Promise<FetchProductUseCaseResponse> {
-    const products = await this.productsRepository.findMany(page, query)
+    const {products, total} = await this.productsRepository.findMany(page, query)
 
     return {
       products,
+      total,
     }
   }
 }

@@ -14,6 +14,8 @@ export class PrismaProductsRepository implements ProductsRepository {
   }
 
   async findMany(page: number, query?: string) {
+    const total = await prisma.product.findMany()
+
     const products = await prisma.product.findMany({
       where: {
         name: {
@@ -30,7 +32,10 @@ export class PrismaProductsRepository implements ProductsRepository {
       ]
     })
 
-    return products
+    return {
+      products,
+      total: total.length,
+    }
   }
 
   async create(data: Prisma.ProductUncheckedCreateInput) {
