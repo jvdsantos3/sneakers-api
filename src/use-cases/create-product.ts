@@ -26,7 +26,7 @@ export class CreateProductUseCase {
     price,
     amount,
     userId,
-  }: CreateProductUseCaseRequest): Promise<CreateProductUseCaseResponse> {
+  }: CreateProductUseCaseRequest): Promise<CreateProductUseCaseResponse> {   
     const product = await this.productsRepository.create({
       image,
       name,
