@@ -14,10 +14,11 @@ export async function editProduct(request: FastifyRequest, reply: FastifyReply) 
     size: z.number(),
     brand: z.string(),
     price: z.number(),
+    amount: z.number(),
   })
 
   const { productId } = editProductParamsSchema.parse(request.params)
-  const { image, name, size, brand, price } = editProductBodySchema.parse(request.body)
+  const { image, name, size, brand, price, amount } = editProductBodySchema.parse(request.body)
 
   try {
     const editProductUseCase = makeEditProductUseCase()
@@ -29,6 +30,7 @@ export async function editProduct(request: FastifyRequest, reply: FastifyReply) 
       size,
       brand,
       price,
+      amount,
     })
 
     return reply.status(200).send({
