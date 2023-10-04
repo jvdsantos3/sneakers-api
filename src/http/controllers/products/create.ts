@@ -28,6 +28,5 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
     userId,
   })
 
-
   return reply.status(201).send()
 }
