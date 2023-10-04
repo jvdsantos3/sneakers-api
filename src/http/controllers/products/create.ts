@@ -14,7 +14,7 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
 
   const { image, name, size, brand, price, amount } = createProductBodySchema.parse(request.body)
 
-  // const userId = request.user.sub
+  const userId = request.user.sub
 
   const createProductUseCase = makeCreateProductUseCase()
 
@@ -25,7 +25,7 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
     brand,
     price,
     amount,
-    userId: 'f145d469-d181-40f1-8bce-77ef7db2967b'
+    userId,
   })
 
 
