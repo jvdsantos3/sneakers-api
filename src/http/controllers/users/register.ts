@@ -7,7 +7,7 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
   const registerBodySchema = z.object({
     name: z.string(),
     email: z.string().email(),
-    password: z.string().min(6),
+    password: z.coerce.string().min(6, { message: 'A senha deve ter no mínimo 6 caracteres' }),
   })
 
   const { name, email, password } = registerBodySchema.parse(request.body)
