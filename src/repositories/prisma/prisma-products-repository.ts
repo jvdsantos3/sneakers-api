@@ -14,7 +14,20 @@ export class PrismaProductsRepository implements ProductsRepository {
   }
 
   async findMany(page: number, query?: string) {
-    const total = await prisma.product.findMany()
+    let total: Product[]
+
+    if (query) {
+      total = await prisma.product.findMany({
+        where: {
+          name: {
+            contains: query,
+            mode: 'insensitive',
+          },
+        },
+      })
+    } else {
+      total = await prisma.product.findMany()
+    }
 
     const products = await prisma.product.findMany({
       where: {
