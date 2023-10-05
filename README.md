@@ -14,7 +14,7 @@
 ### Pré-requisitos
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
-[Git](https://git-scm.com), [Node.js](https://nodejs.org/en/).
+[Git](https://git-scm.com), [Node.js](https://nodejs.org/en/) e [Docker](https://www.docker.com/).
 Além disto é bom ter um editor para trabalhar com o código como [VSCode](https://code.visualstudio.com/)
 
 ### 🎲 Rodando o Front End
@@ -28,6 +28,12 @@ $ cd sneakers-api
 
 # Instale as dependências
 $ npm install
+
+# Crie o container do banco de dados
+$ docker compose up -d
+
+# Aplique as migrations no banco de dados
+$ npx prisma migrate dev
 
 # Execute a aplicação
 $ npm run start:dev

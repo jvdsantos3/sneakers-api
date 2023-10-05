@@ -6,7 +6,8 @@
   "scripts": {
     "start:dev": "tsx watch src/server.ts",
     "test": "vitest run --dir src/use-cases",
-    "test:watch": "vitest --dir src/use-cases"
+    "test:watch": "vitest --dir src/use-cases",
+    "generate:products": "tsx src/util/generate-products.ts"
   },
   "keywords": [],
   "author": "",
