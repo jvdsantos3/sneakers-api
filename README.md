@@ -49,6 +49,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [Fastify](https://fastify.dev/)
 - [Prisma ORM](https://www.prisma.io/)
 - [Vitest](https://vitest.dev/)
+- [Docker](https://www.docker.com/)
 
 ### Autor
 
